@@ -27,7 +27,7 @@ julia> latex(A)
 \end{array}
 ```
 
-By default, the tab alignment if `c` (centered) but an optional
+By default, the tab alignment is `c` (centered) but an optional
 argument to the `latex` function can change that.
 ```julia
 julia> A = mod(rand(Int,4,4),100)  # create random 4x4 matrix of 1:100 integers
@@ -45,13 +45,13 @@ julia> latex(A,'r')
 	80 & 14 & 92 & 64
 \end{array}
 ```
-
+Choices for the tab alignment character are `l`, `c`, and `r`.
 
 PermutationGraph
 ----------------
 
 This is used to create permutation graphs. It requires both the
-`SimpleGraphs` and `Permutations` modules. These can be found in our
+`SimpleGraphs` and `Permutations` modules. These can be found in the
 repositories `scheinerman/SimpleGraphs.jl` and
 `scheinerman/Permutations.jl`.
 
