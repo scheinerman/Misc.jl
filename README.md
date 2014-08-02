@@ -2,7 +2,18 @@ Miscellaneous Julia Code
 ========================
 
 This is a repository for some Julia code I've written that is not 
-worth packaging as a module, but still might be useful.
+worth packaging as a module, but still might be useful. Synopsis:
+
+* **latex**: Function for printing two-dimensional Julia arrays to be
+    pasted into a LaTeX document.
+
+* **PermutationGraph**: Functions for creating permutation
+    graphs. Needs the `Permutations` and `SimpleGraphs` modules.
+
+* **IntervalGraph**: Functions for creating interval graphs. Needs the
+    `ClosedIntervals` and `SimpleGraphs` modules.
+
+
 
 latex
 -----
@@ -102,3 +113,96 @@ into the `SimpleGraphs` module. We decided not to do that because then
 `SimpleGraphs` would require the `Permutations` module and hence not
 be self-contained. Also generation of permutation graphs is fairly
 specialized.
+
+
+IntervalGraph
+-------------
+
+This is used to create interval graphs. These are graphs to which we
+can assign a real interval to every vertex such that vertices are
+adjacent if and only if their assigned intervals intersect. These
+functions require the `ClosedIntervals` and `SimpleGraphs` modules
+found in the repositories `scheinerman/ClosedIntervals.jl` and
+`scheinerman/SimpleGraphs.jl`.
+
+The function `IntervalGraph` can be called in two manners. In the
+first instance, we provide the function with a one-dimensional array
+of `ClosedInterval` objects. The resulting graph has `Int` vertices in
+which `i` and `j` are adjacent iff the `i`-th and `j`-th intervals
+intersect. Here's an example.
+```julia
+julia> include("IntervalGraph.jl")
+RandomIntervalGraph (generic function with 1 method)
+
+julia> A = ClosedInterval(0,4)
+[0,4]
+
+julia> B = ClosedInterval(1,7)
+[1,7]
+
+julia> C = ClosedInterval(5,10)
+[5,10]
+
+julia> G = IntervalGraph([A,B,C])
+SimpleGraph{Int64} (3 vertices, 2 edges)
+
+julia> elist(G)
+2-element Array{(Int64,Int64),1}:
+ (1,2)
+ (2,3)
+```
+
+Alternatively, we can provide a dictionary whose values are
+`ClosedInterval` objects. The vertices of the resulting graph are the
+keys in the `Dict`. Two vertices are adjacent iff they are
+associated by the dictionary with intersecting intervals. Here's an
+example.
+
+```julia
+
+julia> d = Dict{ASCIIString, ClosedInterval{Int}}()
+Dict{ASCIIString,ClosedInterval{Int64}}()
+
+julia> d["alpha"] = A
+[0,4]
+
+julia> d["beta"] = B
+[1,7]
+
+julia> d["gamma"] = C
+[5,10]
+
+julia> G = IntervalGraph(d)
+SimpleGraph{ASCIIString} (3 vertices, 2 edges)
+
+julia> elist(G)
+2-element Array{(ASCIIString,ASCIIString),1}:
+ ("alpha","beta")
+ ("beta","gamma")
+```
+
+We also provide the function `RandomIntervalGraph`. This is called
+with an integer argument `n` to generate the interval graph on `n`
+randomly generated intervals. 
+ 
+A random interval is created by choosing two values independently and
+uniformly from the unit interval [0,1]; those two values are the end
+points of the random interval.
+
+The probability two such intervals intersect is 2/3, and so a random
+interval graph with 100 vertices would have, on average, C(100,2)*2/3
+= 3300 edges. Let's see:
+```julia
+julia> G = RandomIntervalGraph(100)
+SimpleGraph{Int64} (100 vertices, 3419 edges)
+
+julia> G = RandomIntervalGraph(100)
+SimpleGraph{Int64} (100 vertices, 3237 edges)
+
+julia> G = RandomIntervalGraph(100)
+SimpleGraph{Int64} (100 vertices, 3688 edges)
+
+julia> G = RandomIntervalGraph(100)
+SimpleGraph{Int64} (100 vertices, 3172 edges)
+```
+Looks about right!
