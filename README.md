@@ -51,7 +51,7 @@ PermutationGraph
 ----------------
 
 This is used to create permutation graphs. It requires both the
-`SimpleGraphs` and `Permutations` modules. These can be found in our
+`SimpleGraphs` and `Permutations` modules. These can be found in the
 repositories `scheinerman/SimpleGraphs.jl` and
 `scheinerman/Permutations.jl`.
 
