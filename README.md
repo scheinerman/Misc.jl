@@ -12,6 +12,8 @@ worth packaging as a module, but still might be useful. Synopsis:
 
 * **IntervalGraph**: Functions for creating interval graphs. Needs the
     `ClosedIntervals` and `SimpleGraphs` modules.
+    
+* **Cayley**: Create Cayley directed graphs. Needs the `Permutations` and `SimpleGraphs` modules.
 
 
 
@@ -206,3 +208,39 @@ julia> G = RandomIntervalGraph(100)
 SimpleGraph{Int64} (100 vertices, 3172 edges)
 ```
 Looks about right!
+
+
+Cayley
+------
+
+This creates a Cayley (digraph) from a list of permutations. It is called like this: `Cayley(gens)` where `gens` is a one-dimensional array of `Permutation` objects (all of which much have the same `length`). 
+
+The vertices of the resulting digraph are the `factorial(n)` permutations of `{1,2,...,n}`. There is a directed edge from `p` to `q` provided 
+`q==p*g` for some `g` in the `gens` array.
+
+```julia
+julia> include("Cayley.jl")
+Cayley (generic function with 1 method)
+
+julia> p = Permutation([2,3,4,1])
+(1,2,3,4)
+
+julia> q = Permutation([2,1,3,4])
+(1,2)(3)(4)
+
+julia> G = Cayley([p,q])
+SimpleDigraph{Permutation} (24 vertices)
+
+julia> NE(G)
+48
+
+julia> H = simplify(G)
+SimpleGraph{Permutation} (24 vertices)
+
+julia> is_connected(H)
+true
+
+julia> deg(H)'
+1x24 Array{Int64,2}:
+ 3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3
+```
