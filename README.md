@@ -1,7 +1,7 @@
 Miscellaneous Julia Code
 ========================
 
-This is a repository for some Julia code I've written that is not 
+This is a repository for some Julia code I've written that is not
 worth packaging as a module, but still might be useful. Synopsis:
 
 * **latex**: Function for printing two-dimensional Julia arrays to be
@@ -12,7 +12,7 @@ worth packaging as a module, but still might be useful. Synopsis:
 
 * **IntervalGraph**: Functions for creating interval graphs. Needs the
     `ClosedIntervals` and `SimpleGraphs` modules.
-    
+
 * **Cayley**: Create Cayley directed graphs. Needs the `Permutations` and `SimpleGraphs` modules.
 
 
@@ -21,7 +21,7 @@ latex
 -----
 
 This is a function to write out an `Array` in a form suitable for
-inclusion in a LaTeX document. 
+inclusion in a LaTeX document.
 ```julia
 julia> include("latex.jl")
 latex (generic function with 2 methods)
@@ -29,8 +29,8 @@ latex (generic function with 2 methods)
 julia> A = rand(3,3)
 3x3 Array{Float64,2}:
  0.0752368  0.62235    0.0708281
- 0.676779   0.361623   0.618056 
- 0.835201   0.0665051  0.916624 
+ 0.676779   0.361623   0.618056
+ 0.835201   0.0665051  0.916624
 
 julia> latex(A)
 \begin{array}{ccc}
@@ -69,12 +69,12 @@ repositories `scheinerman/SimpleGraphs.jl` and
 `scheinerman/Permutations.jl`.
 
 The main function `PermutationGraph` expects two `Permutation` objects
-(of the same size) and returns a `SimpleGraph{Int}` object. 
+(of the same size) and returns a `SimpleGraph{Int}` object.
 
 For example, suppose that `p` and `q` are `Permutation` objects of
 size `n`. Calling `PermutationGraph(p,q)` creates a `SimpleGraph{Int}`
 with `n` vertices. In this graph we have the edge `(u,v)` exactly when
-`(p[u]-p[v])*(q[u]-q[v])<0`. 
+`(p[u]-p[v])*(q[u]-q[v])<0`.
 
 
 ```julia
@@ -100,7 +100,7 @@ julia> elist(G)
 
 We may call `PermutationGraph` with just one argument, in which case
 `PermutationGraph(p)` is equivalent to `PermutationGraph(p,i)` where
-`i` is the identity permutation (of the same length as `p`). 
+`i` is the identity permutation (of the same length as `p`).
 
 Finally, the file includes the function `RandomPermutationGraph(n)`
 that is equivalent to `PermutationGraph(p,q)` where `p` and `q` are
@@ -185,8 +185,8 @@ julia> elist(G)
 
 We also provide the function `RandomIntervalGraph`. This is called
 with an integer argument `n` to generate the interval graph on `n`
-randomly generated intervals. 
- 
+randomly generated intervals.
+
 A random interval is created by choosing two values independently and
 uniformly from the unit interval [0,1]; those two values are the end
 points of the random interval.
@@ -207,16 +207,39 @@ SimpleGraph{Int64} (100 vertices, 3688 edges)
 julia> G = RandomIntervalGraph(100)
 SimpleGraph{Int64} (100 vertices, 3172 edges)
 ```
-Looks about right!
 
+
+#### Directed Interval Graphs
+
+We provide analogous functions for creating interval *digraphs*. The
+general idea is that each vertex is assigned two intervals: a send and
+a receive interval. There is an edge from `u` to `v` if the send
+interval associated with `u` intersects the receive interval assigned
+to `v`.
+
+* `IntervalDigraph(send_list, rec_list)` creates an interval digraph
+  based on two lists of intervals. These lists must contain
+  `ClosedInterval` objects of the same end point type and of the same length.
+* `IntervalDigraph(send_dict, rec_dict)` creates an interval digraph
+   based on two dictionaries. These dictionaries must have the same
+   keys and associate those keys with `ClosedInterval` objects.
+
+
+In addition, there's a `RandomIntervalDigraph(n)` function that
+generates two lists of random intervals and builds the associated
+`IntervalDigraph`.
 
 Cayley
 ------
 
-This creates a Cayley (digraph) from a list of permutations. It is called like this: `Cayley(gens)` where `gens` is a one-dimensional array of `Permutation` objects (all of which much have the same `length`). 
+This creates a Cayley (digraph) from a list of permutations. It is
+called like this: `Cayley(gens)` where `gens` is a one-dimensional
+array of `Permutation` objects (all of which much have the same
+`length`).
 
-The vertices of the resulting digraph are the `factorial(n)` permutations of `{1,2,...,n}`. There is a directed edge from `p` to `q` provided 
-`q==p*g` for some `g` in the `gens` array.
+The vertices of the resulting digraph are the `factorial(n)`
+permutations of `{1,2,...,n}`. There is a directed edge from `p` to
+`q` provided `q==p*g` for some `g` in the `gens` array.
 
 ```julia
 julia> include("Cayley.jl")
