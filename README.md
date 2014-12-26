@@ -14,7 +14,7 @@ worth packaging as a module, but still might be useful. Synopsis:
     `ClosedIntervals` and `SimpleGraphs` modules.
 
 * **IntervalOrder**: Functions for creating interval orders. Needs the
-  `ClosedIntervals` and `SimplePosets` modules.
+  `ClosedIntervals`, `SimpleGraphs`, and `SimplePosets` modules.
 
 * **Cayley**: Create Cayley directed graphs. Needs the `Permutations`
   and `SimpleGraphs` modules.
