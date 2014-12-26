@@ -235,7 +235,7 @@ generates two lists of random intervals and builds the associated
 
 ## IntervalOrder
 
-This is used to create interval orders. These are posest whose
+This is used to create interval orders. These are posets whose
 elements correspond to real intervals. We have `x<y` exactly when the
 interval assigned to `x` is completely to the left of the interval
 assigned to `y`. Requires my `ClosedInterval`, `SimpleGraphs`, and
