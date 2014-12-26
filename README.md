@@ -13,7 +13,11 @@ worth packaging as a module, but still might be useful. Synopsis:
 * **IntervalGraph**: Functions for creating interval graphs. Needs the
     `ClosedIntervals` and `SimpleGraphs` modules.
 
-* **Cayley**: Create Cayley directed graphs. Needs the `Permutations` and `SimpleGraphs` modules.
+* **IntervalOrder**: Functions for creating interval orders. Needs the
+  `ClosedIntervals` and `SimplePosets` modules.
+
+* **Cayley**: Create Cayley directed graphs. Needs the `Permutations`
+  and `SimpleGraphs` modules.
 
 
 
@@ -228,6 +232,22 @@ to `v`.
 In addition, there's a `RandomIntervalDigraph(n)` function that
 generates two lists of random intervals and builds the associated
 `IntervalDigraph`.
+
+## IntervalOrder
+
+This is used to create interval orders. These are posest whose
+elements correspond to real intervals. We have `x<y` exactly when the
+interval assigned to `x` is completely to the left of the interval
+assigned to `y`. Requires my `ClosedInterval`, `SimpleGraphs`, and
+`SimplePosets` modules.
+
+The `IntervalOrder` function can be called in two manners that are
+completely analogous to the `IntervalGraph` functions described
+earlier. One provides either an array of `ClosedInterval` objects of a
+dictionary from arbitrary keys to `ClosedInterval` values.
+
+Finally, `RandomIntervalOrder(n)` generates `n` random intervals and
+builds an `IntervalOrder` based on them.
 
 Cayley
 ------
