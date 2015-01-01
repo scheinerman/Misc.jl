@@ -1,5 +1,4 @@
-Miscellaneous Julia Code
-========================
+# Miscellaneous Julia Code
 
 This is a repository for some Julia code I've written that is not
 worth packaging as a module, but still might be useful. Synopsis:
@@ -19,10 +18,12 @@ worth packaging as a module, but still might be useful. Synopsis:
 * **Cayley**: Create Cayley directed graphs. Needs the `Permutations`
   and `SimpleGraphs` modules.
 
+* **Projective**: Working with finite projective planes of prime
+  order. [Under development.]
 
 
-latex
------
+## latex
+
 
 This is a function to write out an `Array` in a form suitable for
 inclusion in a LaTeX document.
@@ -64,8 +65,7 @@ julia> latex(A,'r')
 ```
 Choices for the tab alignment character are `l`, `c`, and `r`.
 
-PermutationGraph
-----------------
+## PermutationGraph
 
 This is used to create permutation graphs. It requires both the
 `SimpleGraphs` and `Permutations` modules. These can be found in the
@@ -121,8 +121,7 @@ be self-contained. Also generation of permutation graphs is fairly
 specialized.
 
 
-IntervalGraph
--------------
+## IntervalGraph
 
 This is used to create interval graphs. These are graphs to which we
 can assign a real interval to every vertex such that vertices are
@@ -249,8 +248,7 @@ dictionary from arbitrary keys to `ClosedInterval` values.
 Finally, `RandomIntervalOrder(n)` generates `n` random intervals and
 builds an `IntervalOrder` based on them.
 
-Cayley
-------
+## Cayley
 
 This creates a Cayley (digraph) from a list of permutations. It is
 called like this: `Cayley(gens)` where `gens` is a one-dimensional
@@ -287,3 +285,11 @@ julia> deg(H)'
 1x24 Array{Int64,2}:
  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3
 ```
+
+## Projective
+
+*This is a work in progress!!*
+
+Define a `Projective` type that represents points/lines in a finite
+projective plane of prime order. Requires our `Mods` module. 
+
