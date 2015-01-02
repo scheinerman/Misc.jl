@@ -292,7 +292,10 @@ This file defines a `Projective` data type that can be used to
 represent either a point or a line in a finite projective plane of
 prime order. These elements are held as normalized homogeneous
 coordinates. That is, each point (line) is a triple of `Mod` objects
-such that the last nonzero coordinate is 1. 
+such that the last nonzero coordinate is 1.
+
+**Note**: Requires my `Mods` and `SimpleGraphs` module. (The
+`SimpleGraphs` module is only used for the `incidence_graph` function.)
 
 For example, to construct the point (line) whose homogeneous
 coordinates are `(2,4,3)` working in a projective plane of order `7`
@@ -349,6 +352,52 @@ SimpleGraph{(Projective,Int64)} (26 vertices)
 julia> diam(G)
 3
 ```
+
+### Various additional features
+
++ The `generate` function will output all the points [lines] of a
+  projective plane of a given order:
+
+  ```julia
+  julia> generate(2)
+  7-element Array{Projective,1}:
+  [1,0,0]_(2)
+  [1,0,1]_(2)
+  [1,1,0]_(2)
+  [1,1,1]_(2)
+  [0,1,0]_(2)
+  [0,1,1]_(2)
+  [0,0,1]_(2)
+  ```julia
+
++ Two `Projective` objects can be compared for equality either with
+  `isequals` or with `==`:
+  ```julia
+  julia> Projective(1,2,3,11) == Projective(2,4,6,11)
+  true
+  ```
+
++ The `hash` function is defined for `Projective` objects so they may
+  be stored in `Set` containers, used as `Dict` keys, and so forth.
+
++ Two `Projective` objects (or the same modulus) can be multiplied
+  with `*`: this is simply the dot product of their homogeneous
+  coordinate representations. This is used by the `incident` function
+  (a zero result indicates incidence).
+  ```julia
+  julia> P = Projective(3,0,5,11)
+  [5,0,1]_(11)
+
+  julia> Q = Projective(1,1,1,11)
+  [1,1,1]_(11)
+
+  julia> P*Q
+  Mod(6,11)
+
+  julia> incident(P,Q)
+  false
+  ```
+
 
 ### Internals of the `Projective` type
 
