@@ -289,7 +289,7 @@ julia> deg(H)'
 ## Projective
 
 This file defines a `Projective` data type that can be used to
-represent either a point of a line in a finite projective plane of
+represent either a point or a line in a finite projective plane of
 prime order. These elements are held as normalized homogeneous
 coordinates. That is, each point (line) is a triple of `Mod` objects
 such that the last nonzero coordinate is 1. 
@@ -350,7 +350,7 @@ julia> diam(G)
 3
 ```
 
-### Internals
+### Internals of the `Projective` type
 
 The three coordinates are held as `Mod` objects (with, perhaps,
 differing values but the same modulus `p`). These coordinates are
