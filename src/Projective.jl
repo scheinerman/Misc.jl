@@ -95,3 +95,20 @@ function incidence_matrix(p::Integer)
     end
     return A
 end
+
+using SimpleGraphs
+
+# this will do for now ... not really what we want
+function incidence_graph(p::Integer)
+    pts = generate(p)
+    G = SimpleGraph{Projective}()
+    
+    for P in pts
+        for Q in pts
+            if incident(P,Q)
+                add!(G,P,Q)
+            end
+        end
+    end
+    return G
+end
