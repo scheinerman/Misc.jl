@@ -368,7 +368,7 @@ julia> diam(G)
   [0,1,0]_(2)
   [0,1,1]_(2)
   [0,0,1]_(2)
-  ```julia
+  ```
 
 + Two `Projective` objects can be compared for equality either with
   `isequals` or with `==`:
