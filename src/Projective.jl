@@ -98,15 +98,15 @@ end
 
 using SimpleGraphs
 
-# this will do for now ... not really what we want
+# this is a bipartite point/line incidence graph
 function incidence_graph(p::Integer)
     pts = generate(p)
-    G = SimpleGraph{Projective}()
+    G = SimpleGraph{(Projective,Int)}()
     
     for P in pts
         for Q in pts
             if incident(P,Q)
-                add!(G,P,Q)
+                add!(G,(P,1),(Q,2))
             end
         end
     end
