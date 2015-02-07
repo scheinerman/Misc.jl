@@ -3,8 +3,8 @@
 This is a repository for some Julia code I've written that is not
 worth packaging as a module, but still might be useful. Synopsis:
 
-* **latex**: Function for printing two-dimensional Julia arrays to be
-    pasted into a LaTeX document.
+* **latex**: *This file has been removed!* Please see my new
+  `LatexPrint` module. 
 
 * **PermutationGraph**: Functions for creating permutation
     graphs. Needs the `Permutations` and `SimpleGraphs` modules.
