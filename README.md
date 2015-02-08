@@ -21,6 +21,8 @@ worth packaging as a module, but still might be useful. Synopsis:
 * **Projective**: Working with finite projective planes of prime
   order.
 
+* **Benford**: Experiments for initial digits of numbers.
+  (Likely not of use to anyone but me.)
 
 ## latex
 
