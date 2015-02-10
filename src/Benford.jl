@@ -3,7 +3,7 @@
 char2digit(c::Char) = c - '0'
 
 function first_digit(x::Real, alert::Bool=false)
-    if x==0 
+    if x==0
         if alert
             warn("Received 0, returning 0")
         end
@@ -11,7 +11,7 @@ function first_digit(x::Real, alert::Bool=false)
     end
 
     x = abs(x) # make sure it's positive
-    
+
     while x < 1
         x *= 10
     end
@@ -19,7 +19,7 @@ function first_digit(x::Real, alert::Bool=false)
     c = first(string(x))
     return char2digit(c)
 end
-        
+
 function first_counts{T<:Real}(x::Array{T,1})
     digs = map(first_digit,x)
     n = length(digs)
@@ -49,7 +49,7 @@ function report{T<:Real}(x::Array{T,1})
         log(10,k+1)-log(10,k))
     end
 end
-    
+
 
 function experiment()
     n = 1000
@@ -86,12 +86,13 @@ function mult_table(d::Int)
     for n=10^(d-1):10^d-1
         digs = digit_split(n)
         v = prod(digs)
+        # println(digs, " --> ", v)
         if v != 0
             push!(vals,v)
         end
     end
     return vals
 end
-    
+
 
 mult_report(d::Int) = report(mult_table(d))
