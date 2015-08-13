@@ -50,6 +50,17 @@ function report{T<:Real}(x::Array{T,1})
     end
 end
 
+function report_array{T<:Real}(x::Array{T,1})
+    counts, hist = first_hists(x)
+    A = Array(Any, (9,3))
+    for k=1:9
+        A[k,1] = k
+        A[k,2] = counts[k]
+        A[k,3] = round(hist[k]*100,2)
+    end
+    return A
+end
+
 
 function experiment()
     n = 1000
@@ -81,7 +92,7 @@ function digit_split(n::Int)
 end
 
 # create a 9^d multiplication table
-function mult_table(d::Int)
+function mult_table_old(d::Int)
     vals = Int[]
     for n=10^(d-1):10^d-1
         digs = digit_split(n)
@@ -94,5 +105,32 @@ function mult_table(d::Int)
     return vals
 end
 
+function mult_table(d::Int)
+    tic()
+    counts = zeros(Int,9)
+    for n=10^(d-1):10^d-1
+        digs = digit_split(n)
+        v = prod(digs)
+        if v != 0
+            d = first_digit(v)
+            counts[d]+=1
+        end
+    end
+    toc()
+    return counts
+end
 
-mult_report(d::Int) = report(mult_table(d))
+mult_report_old(d::Int) = report(mult_table(d))
+
+function mult_report(d::Int)
+    counts = mult_table(d)
+    N = sum(counts)
+
+    A = Array(Any,(9,3))
+    for k=1:9
+        A[k,1] = k
+        A[k,2] = counts[k]
+        A[k,3] = round(100*counts[k]/N,2)
+    end
+    return A
+end
