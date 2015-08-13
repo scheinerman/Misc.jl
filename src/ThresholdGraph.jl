@@ -1,7 +1,7 @@
 using SimpleGraphs
 
 function ThresholdGraph{T<:Real}(w::Array{T,1})
-    n = length(x)
+    n = length(w)
     G = IntGraph(n)
     for i=1:n-1
         for j=i+1:n
@@ -15,6 +15,6 @@ end
 
 
 function RandomThresholdGraph(n::Int)
-    w = rand(n,1)
+    w = rand(n)
     return ThresholdGraph(w)
 end
