@@ -18,3 +18,13 @@ function RandomThresholdGraph(n::Int)
     w = rand(n)
     return ThresholdGraph(w)
 end
+
+
+function degsort(G::SimpleGraph)
+    vv = vlist(G)
+    dd = [ deg(G,v) for v in vv ]
+    p  = sortperm(dd)
+
+    f = Dict(zip(p,vv))
+    return relabel(G,f)
+end
