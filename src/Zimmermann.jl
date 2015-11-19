@@ -75,9 +75,12 @@ using ProgressMeter
 function try_all(n::Int, k::Int)
     best_set = collect(1:k)
     best_val = length(sumprod(best_set))
-    println("Reference value is ", best_val)
 
     steps = binomial(n,k)
+
+    println(steps," sets to be considered")
+    println("Reference value is ", best_val)
+
     P = Progress(steps,1)
 
     for X in subsets(collect(1:n),k)
