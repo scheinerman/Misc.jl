@@ -71,7 +71,6 @@ using Iterators
 using ShowSet
 using ProgressMeter
 
-
 function try_all(n::Int, k::Int)
     best_set = collect(1:k)
     best_val = length(sumprod(best_set))
@@ -80,6 +79,7 @@ function try_all(n::Int, k::Int)
 
     println(steps," sets to be considered")
     println("Reference value is ", best_val)
+    tic()
 
     P = Progress(steps,1)
 
@@ -91,6 +91,7 @@ function try_all(n::Int, k::Int)
             best_val = v
         end
     end
-    println("Best value is: ", best_val)
+    toc()
+    println("Best value is ", best_val)
     return IntSet(best_set)
 end
