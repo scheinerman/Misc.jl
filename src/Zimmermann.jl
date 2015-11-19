@@ -71,24 +71,28 @@ using Iterators
 using ShowSet
 using ProgressMeter
 
-function try_all(n::Int, k::Int)
-    best_set = collect(1:k)
-    best_val = length(sumprod(best_set))
+try_all(n::Int, k::Int) = try_all(collect(1:n),k)
+
+function try_all(mother_set::Array{Int,1}, k::Int, prefix::Array{Int,1}=Int[])
+    best_set = []
+    n = length(mother_set)+length(prefix)
+    best_val = n*n*n
+
+    k -= length(prefix)
 
     steps = binomial(n,k)
-
-    println(steps," sets to be considered")
-    println("Reference value is ", best_val)
     tic()
 
     P = Progress(steps,1)
 
-    for X in subsets(collect(1:n),k)
+    for X in subsets(mother_set,k)
         next!(P)
-        v = length(sumprod(X))
+        Y = [prefix; X]
+        v = length(sumprod(Y))
         if v < best_val
-            best_set = X
+            best_set = Y
             best_val = v
+            println("Improved to ", best_val, " for ", IntSet(best_set))
         end
     end
     toc()
