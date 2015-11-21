@@ -2,9 +2,9 @@ push!(LOAD_PATH,pwd())
 using Zimmermann
 
 
-front = collect(1:5);
-middle = collect(6:15);
-tail = collect(16:40);
+front = collect(1:10);
+middle = collect(11:15);
+tail = collect(16:35);
 k = 20;
 
 
