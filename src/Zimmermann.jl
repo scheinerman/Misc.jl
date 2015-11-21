@@ -64,13 +64,10 @@ function try_all(mother_set::Array{Int,1},
                  prefix::Array{Int,1}=Int[],
                  verbose::Bool=true)
 
-    if k > length(mother_set)
-        error()
-    end
     
     # DEBUG #
-    println("Working on subsets of:", IntSet(mother_set),
-            "\nwith prefix ", IntSet(prefix))
+    # println("Working on subsets of:", IntSet(mother_set),
+    #         "\nwith prefix ", IntSet(prefix))
     
     best_set = []
     n = length(mother_set)+length(prefix)
@@ -78,6 +75,16 @@ function try_all(mother_set::Array{Int,1},
 
     k -= length(prefix)
 
+    
+    if k > length(mother_set)
+        print("ERROR!! ")
+        print("k = ", k)
+        print(" Prefix:  ", prefix)
+        println(" Mother: ", mother_set)
+        error("k is too large")
+    end
+
+    
     steps = binomial(n,k)
     if verbose
         tic()
@@ -104,7 +111,7 @@ function try_all(mother_set::Array{Int,1},
     end
 
     # DEBUG #
-    println("Finished with ", IntSet(prefix), " U ", IntSet(mother_set))
+    # println("Finished with ", IntSet(prefix), " U ", IntSet(mother_set))
     
     return IntSet(best_set)
 end
@@ -129,7 +136,11 @@ function super_try_all(front::Array{Int,1},
                        verbose::Bool=false)
 
     if k < length(front)+length(middle)
-        error()
+        error("k is too small")
+    end
+
+    if k > length(front)+length(tail)
+        error("k is too large")
     end
 
     X = collect(subsets(middle))
