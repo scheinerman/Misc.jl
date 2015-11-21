@@ -98,8 +98,6 @@ function try_all(mother_set::Array{Int,1},
     end
 
     # println("Finished with ", IntSet(prefix), " U ", IntSet(mother_set))
-
-
     
     return IntSet(best_set)
 end
