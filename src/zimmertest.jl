@@ -2,10 +2,10 @@ push!(LOAD_PATH,pwd())
 using Zimmermann
 
 
-front = collect(1:6);
-middle = collect(7:15);
-tail = collect(16:20);
-k = 10;
+front = collect(1:5);
+middle = collect(6:10);
+tail = collect(11:35);
+k = 13;
 
 
 function try_both(front, middle, tail, k)
@@ -35,10 +35,12 @@ function try_both(front, middle, tail, k)
     toc()
 end
 
-tic();
-A = super_try_all(front, middle, tail, k);
-toc();
-println(A)
-println(k," --> ", length(sumprod(A)))
+# tic();
+# A = super_try_all(front, middle, tail, k);
+# toc();
+# println(A)
+# println(k," --> ", length(sumprod(A)))
 
-# try_both(front, middle, tail, k)
+# println()
+
+try_both(front, middle, tail, k)

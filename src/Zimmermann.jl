@@ -64,7 +64,13 @@ function try_all(mother_set::Array{Int,1},
                  prefix::Array{Int,1}=Int[],
                  verbose::Bool=true)
 
-    # println("Working on ", IntSet(prefix), " U ", IntSet(mother_set))
+    if k > length(mother_set)
+        error()
+    end
+    
+    # DEBUG #
+    println("Working on subsets of:", IntSet(mother_set),
+            "\nwith prefix ", IntSet(prefix))
     
     best_set = []
     n = length(mother_set)+length(prefix)
@@ -97,7 +103,8 @@ function try_all(mother_set::Array{Int,1},
         println("Best value is ", best_val)
     end
 
-    # println("Finished with ", IntSet(prefix), " U ", IntSet(mother_set))
+    # DEBUG #
+    println("Finished with ", IntSet(prefix), " U ", IntSet(mother_set))
     
     return IntSet(best_set)
 end
@@ -107,10 +114,10 @@ function choose_better(A::IntSet, B::IntSet)
     a = length(sumprod(A))
     b = length(sumprod(B))
     if a<b
-        println("Best score so far is ", a, "\nfor ", A)
+        # println("Best score so far is ", a, "\nfor ", A)
         return A
     else
-        println("Best score so far is ", b, "\nfor ", B)
+        # println("Best score so far is ", b, "\nfor ", B)
         return B
     end
 end
@@ -120,6 +127,11 @@ function super_try_all(front::Array{Int,1},
                        tail::Array{Int,1},
                        k::Int,
                        verbose::Bool=false)
+
+    if k < length(front)+length(middle)
+        error()
+    end
+
     X = collect(subsets(middle))
     result = @parallel (choose_better) for t in X
         try_all(tail, k, [front; t], verbose)
