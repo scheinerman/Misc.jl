@@ -10,4 +10,4 @@
 #SBATCH --ntasks-per-node=24
 
 
-time julia -p 40 zimmertest.jl > harm.out
+time julia -p 40 zimmertest.jl > zim.out
