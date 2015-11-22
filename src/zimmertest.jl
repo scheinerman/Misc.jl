@@ -2,14 +2,14 @@ push!(LOAD_PATH,pwd())
 using Zimmermann
 
 front = [collect(1:10);[12]];
-middle = [14,15,16,18,20,21,22,24]
-tail = [27,28,30,32,33,34,35,36,40,42,44,45,46,48,49,50,52,54,56,60]
+middle = [14,15,16,18,20,21,22,24,27,28,30]
+tail = [32,35,36,40] # 42,45,48,49,50,54,56] # ,60,63,64]
 
 k = 20;
 
-println("Front  = ", IntSet(front))
-println("Middle = ", IntSet(middle))
-println("Tail   = ", IntSet(tail))
+println("Front  = ", IntSet(front),"\t", length(front))
+println("Middle = ", IntSet(middle),"\t", length(middle))
+println("Tail   = ", IntSet(tail),"\t", length(tail))
 println("k      = ", k)
 
 
