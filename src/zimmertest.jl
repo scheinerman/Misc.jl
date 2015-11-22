@@ -1,10 +1,10 @@
 push!(LOAD_PATH,pwd())
 using Zimmermann
 
-
 front = [collect(1:10),12];
 middle = [11,collect(13:15)];
 tail = collect(16:32);
+
 k = 20;
 
 
