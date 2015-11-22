@@ -2,8 +2,8 @@ push!(LOAD_PATH,pwd())
 using Zimmermann
 
 front = [collect(1:10);[12]];
-middle = [[11];collect(13:15)];
-tail = collect(16:32);
+middle = [14,15,16,18,20,21,22]
+tail = [24,26,27,28,30,32,33,34,35,36,38,39,40,42,44,45,46,48,49,50,51,52,54]
 
 k = 20;
 
