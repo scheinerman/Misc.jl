@@ -4,7 +4,7 @@ using Zimmermann
 
 front = collect(1:10);
 middle = collect(11:15);
-tail = collect(16:35);
+tail = collect(16:32);
 k = 20;
 
 

@@ -1,6 +1,7 @@
 module Zimmermann
 
 export sumprod, upperbound, try_all, super_try_all, choose_better
+export super_try_time_guess
 
 
 """
@@ -128,6 +129,19 @@ function choose_better(A::IntSet, B::IntSet)
         return B
     end
 end
+
+
+function super_try_time_guess(front::Array{Int,1},
+                              middle::Array{Int,1},
+                              tail::Array{Int,1},
+                              k::Int)
+    tic()
+    A = try_all(tail,k,front,false)
+    t = toq();
+    xp = length(middle) + length(tail)
+    return 2^xp * t
+end
+
 
 function super_try_all(front::Array{Int,1},
                        middle::Array{Int,1},
