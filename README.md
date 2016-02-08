@@ -4,7 +4,7 @@ This is a repository for some Julia code I've written that is not
 worth packaging as a module, but still might be useful. Synopsis:
 
 * **latex**: *This file has been removed!* Please see my new
-  `LatexPrint` module. 
+  `LatexPrint` module.
 
 * **PermutationGraph**: Functions for creating permutation
     graphs. Needs the `Permutations` and `SimpleGraphs` modules.
@@ -23,6 +23,12 @@ worth packaging as a module, but still might be useful. Synopsis:
 
 * **Benford**: Experiments for initial digits of numbers.
   (Likely not of use to anyone but me.)
+
+* **DictCompose**: For dictionaries `f` and `g`, define `f*g` to be a
+  new dictionary in which `(f*g)[x]` is `f[g[x]]`. Warnings are raised
+  to report the number of bad `x` values (where `g[x]` is not a key of
+  `f`).
+
 
 ## latex
 
@@ -323,7 +329,7 @@ The *incidence matrix* of a finite projective plane of order `p` is an
 `n` by `n` matrix (where `n == p*p+p+1`) whose rows are indexed by
 the points and whose columns are indexed by the lines of a finite
 projective plane of order `p`. An entry is `1` if the point (for that
-row) lies on the line (for that column); otherwise, the entry is `0`. 
+row) lies on the line (for that column); otherwise, the entry is `0`.
 ```julia
 julia> incidence_matrix(3)
 13x13 Array{Int64,2}:
