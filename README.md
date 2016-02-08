@@ -29,50 +29,6 @@ worth packaging as a module, but still might be useful. Synopsis:
   to report the number of bad `x` values (where `g[x]` is not a key of
   `f`).
 
-
-## latex
-
-
-This is a function to write out an `Array` in a form suitable for
-inclusion in a LaTeX document.
-```julia
-julia> include("latex.jl")
-latex (generic function with 2 methods)
-
-julia> A = rand(3,3)
-3x3 Array{Float64,2}:
- 0.0752368  0.62235    0.0708281
- 0.676779   0.361623   0.618056
- 0.835201   0.0665051  0.916624
-
-julia> latex(A)
-\begin{array}{ccc}
-	0.07523681056327902 & 0.6223496620833067 & 0.07082809345526475\\
-	0.6767789724249922 & 0.36162299649965735 & 0.6180563298335209\\
-	0.8352007488351822 & 0.06650514397521623 & 0.9166239893912087
-\end{array}
-```
-
-By default, the tab alignment is `c` (centered) but an optional
-argument to the `latex` function can change that.
-```julia
-julia> A = mod(rand(Int,4,4),100)  # create random 4x4 matrix of 1:100 integers
-4x4 Array{Int64,2}:
- 20   8  62  51
- 91  15  63  66
- 57  98  47  28
- 80  14  92  64
-
-julia> latex(A,'r')
-\begin{array}{rrrr}
-	20 & 8 & 62 & 51\\
-	91 & 15 & 63 & 66\\
-	57 & 98 & 47 & 28\\
-	80 & 14 & 92 & 64
-\end{array}
-```
-Choices for the tab alignment character are `l`, `c`, and `r`.
-
 ## PermutationGraph
 
 This is used to create permutation graphs. It requires both the
