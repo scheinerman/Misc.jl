@@ -2,7 +2,7 @@
 
 using Mods
 
-import Base.show, Base.hash
+import Base.show, Base.hash, Base.*
 
 immutable Projective
     a::Mod
@@ -43,10 +43,10 @@ end
 
 incident(P::Projective, Q::Projective) = P*Q==0
 
-function hash(P::Projective, h::Uint64 = uint64(0))
-    h1::Uint64 = hash(P.a,h)
-    h2::Uint64 = hash(P.b,h1)
-    h3::Uint64 = hash(P.c,h2)
+function hash(P::Projective, h::UInt64 = uint64(0))
+    h1::UInt64 = hash(P.a,h)
+    h2::UInt64 = hash(P.b,h1)
+    h3::UInt64 = hash(P.c,h2)
     return h3
 end
 
@@ -67,9 +67,9 @@ function generate(p::Integer)
             count += 1
         end
     end
-    
+
     # case a=0, b=1
-    for c=0:p-1       
+    for c=0:p-1
         A[count] = Projective(0,1,c,p)
         count += 1
     end
@@ -101,8 +101,9 @@ using SimpleGraphs
 # this is a bipartite point/line incidence graph
 function incidence_graph(p::Integer)
     pts = generate(p)
-    G = SimpleGraph{(Projective,Int)}()
-    
+    T = Tuple{Projective,Int}
+    G = SimpleGraph{T}()
+
     for P in pts
         for Q in pts
             if incident(P,Q)
