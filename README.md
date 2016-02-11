@@ -10,23 +10,24 @@ worth packaging as a module, but still might be useful. Synopsis:
 
 * `PermutationGraph`: Functions for creating permutation
     graphs. Needs the `Permutations` and `SimpleGraphs` modules.
+  **Warning**: I plan to move this to `SimpleGraphRepresentations`.
 
 * `IntervalGraph`: *This file has been removed!* See
   `SimpleGraphRepresentations`. 
 
-* **IntervalOrder**: Functions for creating interval orders. Needs the
+* `IntervalOrder`: Functions for creating interval orders. Needs the
   `ClosedIntervals`, `SimpleGraphs`, and `SimplePosets` modules.
 
-* **Cayley**: Create Cayley directed graphs. Needs the `Permutations`
+* `Cayley`: Create Cayley directed graphs. Needs the `Permutations`
   and `SimpleGraphs` modules.
 
-* **Projective**: Working with finite projective planes of prime
+* `Projective`: Working with finite projective planes of prime
   order.
 
-* **Benford**: Experiments for initial digits of numbers.
+* `Benford`: Experiments for initial digits of numbers.
   (Likely not of use to anyone but me.)
 
-* **DictCompose**: For dictionaries `f` and `g`, define `f*g` to be a
+* `DictCompose`: For dictionaries `f` and `g`, define `f*g` to be a
   new dictionary in which `(f*g)[x]` is `f[g[x]]`. Warnings are raised
   to report the number of bad `x` values (where `g[x]` is not a key of
   `f`).
