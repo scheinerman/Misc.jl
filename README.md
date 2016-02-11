@@ -8,9 +8,9 @@ worth packaging as a module, but still might be useful. Synopsis:
 * `latex`: *This file has been removed!* Please see my new
   `LatexPrint` module.
 
-* `PermutationGraph`: Functions for creating permutation
-    graphs. Needs the `Permutations` and `SimpleGraphs` modules.
-  **Warning**: I plan to move this to `SimpleGraphRepresentations`.
+* `PermutationGraph`: *This file has been removed!* 
+  See `SimpleGraphRepresentations`.
+
 
 * `IntervalGraph`: *This file has been removed!* See
   `SimpleGraphRepresentations`. 
@@ -32,65 +32,6 @@ worth packaging as a module, but still might be useful. Synopsis:
   to report the number of bad `x` values (where `g[x]` is not a key of
   `f`).
 
-## PermutationGraph
-
-This is used to create permutation graphs. It requires both the
-`SimpleGraphs` and `Permutations` modules. These can be found in the
-repositories `scheinerman/SimpleGraphs.jl` and
-`scheinerman/Permutations.jl`.
-
-The main function `PermutationGraph` expects two `Permutation` objects
-(of the same size) and returns a `SimpleGraph{Int}` object.
-
-For example, suppose that `p` and `q` are `Permutation` objects of
-size `n`. Calling `PermutationGraph(p,q)` creates a `SimpleGraph{Int}`
-with `n` vertices. In this graph we have the edge `(u,v)` exactly when
-`(p[u]-p[v])*(q[u]-q[v])<0`.
-
-
-```julia
-julia> include("PermutationGraph.jl")
-RandomPermutationGraph (generic function with 1 method)
-
-julia> p = Permutation([2,3,4,1,5])
-(1,2,3,4)(5)
-
-julia> q = Permutation([5,1,3,2,4])
-(1,5,4,2)(3)
-
-julia> G = PermutationGraph(p,q)
-SimpleGraph{Int64} (5 vertices, 4 edges)
-
-julia> elist(G)
-4-element Array{(Int64,Int64),1}:
- (1,2)
- (1,3)
- (1,5)
- (2,4)
-```
-
-We may call `PermutationGraph` with just one argument, in which case
-`PermutationGraph(p)` is equivalent to `PermutationGraph(p,i)` where
-`i` is the identity permutation (of the same length as `p`).
-
-Finally, the file includes the function `RandomPermutationGraph(n)`
-that is equivalent to `PermutationGraph(p,q)` where `p` and `q` are
-random permutations of length `n`.
-```julia
-julia> RandomPermutationGraph(10)
-SimpleGraph{Int64} (10 vertices, 16 edges)
-```
-
-**Note**: It would have been natural to include `PermutationGraph`
-into the `SimpleGraphs` module. We decided not to do that because then
-`SimpleGraphs` would require the `Permutations` module and hence not
-be self-contained. Also generation of permutation graphs is fairly
-specialized.
-
-
-## IntervalGraph
-
-**This has been moved to** `SimpleGraphRepresentations`.
 
 ## IntervalOrder
 
