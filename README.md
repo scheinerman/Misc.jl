@@ -8,12 +8,12 @@ worth packaging as a module, but still might be useful. Synopsis:
 * `latex`: *This file has been removed!* Please see my new
   `LatexPrint` module.
 
-* `PermutationGraph`: *This file has been removed!* 
+* `PermutationGraph`: *This file has been removed!*
   See `SimpleGraphRepresentations`.
 
 
 * `IntervalGraph`: *This file has been removed!* See
-  `SimpleGraphRepresentations`. 
+  `SimpleGraphRepresentations`.
 
 * `IntervalOrder`: Functions for creating interval orders. Needs the
   `ClosedIntervals`, `SimpleGraphs`, and `SimplePosets` modules.
@@ -32,6 +32,9 @@ worth packaging as a module, but still might be useful. Synopsis:
   to report the number of bad `x` values (where `g[x]` is not a key of
   `f`).
 
+* `factorion`: code for finding all factorions.
+
+* `istum(A)` determines if the integer matrix `A` is totally unimodular.
 
 ## IntervalOrder
 
