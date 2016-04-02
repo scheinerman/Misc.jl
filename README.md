@@ -11,7 +11,6 @@ worth packaging as a module, but still might be useful. Synopsis:
 * `PermutationGraph`: *This file has been removed!*
   See `SimpleGraphRepresentations`.
 
-
 * `IntervalGraph`: *This file has been removed!* See
   `SimpleGraphRepresentations`.
 
@@ -32,7 +31,7 @@ worth packaging as a module, but still might be useful. Synopsis:
   to report the number of bad `x` values (where `g[x]` is not a key of
   `f`).
 
-* `Factorion`: code for finding all factorions.
+* `factorion`: code for finding all factorions.
 
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
 
