@@ -32,7 +32,7 @@ worth packaging as a module, but still might be useful. Synopsis:
   to report the number of bad `x` values (where `g[x]` is not a key of
   `f`).
 
-* `factorion`: code for finding all factorions.
+* `Factorion`: code for finding all factorions.
 
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
 
