@@ -1,57 +1,38 @@
 # Miscellaneous Julia Code
 
-**Notice**: I am moving some of these functionalities elsewhere.
 
 This is a repository for some Julia code I've written that is not
-worth packaging as a module, but still might be useful. Synopsis:
+worth packaging as a module, but still might be useful.
 
-* `latex`: *This file has been removed!* Please see my new
-  `LatexPrint` module.
-
-* `PermutationGraph`: *This file has been removed!*
-  See `SimpleGraphRepresentations`.
-
-* `IntervalGraph`: *This file has been removed!* See
-  `SimpleGraphRepresentations`.
-
-* `IntervalOrder`: Functions for creating interval orders. Needs the
-  `ClosedIntervals`, `SimpleGraphs`, and `SimplePosets` modules.
+## Synopsis
 
 * `Cayley`: Create Cayley directed graphs. Needs the `Permutations`
   and `SimpleGraphs` modules.
-
 * `Projective`: Working with finite projective planes of prime
   order.
-
 * `Benford`: Experiments for initial digits of numbers.
   (Likely not of use to anyone but me.)
-
 * `DictCompose`: For dictionaries `f` and `g`, define `f*g` to be a
   new dictionary in which `(f*g)[x]` is `f[g[x]]`. Warnings are raised
   to report the number of bad `x` values (where `g[x]` is not a key of
   `f`).
-
 * `factorion`: code for finding all factorions.
-
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
 
-## IntervalOrder
+### Removed items
 
-This is used to create interval orders. These are posets whose
-elements correspond to real intervals. We have `x<y` exactly when the
-interval assigned to `x` is completely to the left of the interval
-assigned to `y`. Requires my `ClosedInterval`, `SimpleGraphs`, and
-`SimplePosets` modules.
+* `latex`: *This file has been removed!* Please see my new
+  `LatexPrint` module.
+* `PermutationGraph`: *This file has been removed!*
+  See `SimpleGraphRepresentations`.
+* `IntervalGraph`: *This file has been removed!* See
+  `SimpleGraphRepresentations`.
+* `IntervalOrder`: *This file has been removed!* See
+`SimplePosetRepresentations`.
 
-The `IntervalOrder` function can be called in two manners that are
-completely analogous to the `IntervalGraph` functions described
-earlier. One provides either an array of `ClosedInterval` objects of a
-dictionary from arbitrary keys to `ClosedInterval` values.
+## More detail
 
-Finally, `RandomIntervalOrder(n)` generates `n` random intervals and
-builds an `IntervalOrder` based on them.
-
-## Cayley
+### Cayley
 
 This creates a Cayley (digraph) from a list of permutations. It is
 called like this: `Cayley(gens)` where `gens` is a one-dimensional
@@ -89,7 +70,7 @@ julia> deg(H)'
  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3
 ```
 
-## Projective
+### Projective
 
 This file defines a `Projective` data type that can be used to
 represent either a point or a line in a finite projective plane of
@@ -118,7 +99,7 @@ julia> incident(P,Q)
 true
 ```
 
-### Incidence matrix and graph
+#### Incidence matrix and graph
 
 The *incidence matrix* of a finite projective plane of order `p` is an
 `n` by `n` matrix (where `n == p*p+p+1`) whose rows are indexed by
@@ -156,7 +137,7 @@ julia> diam(G)
 3
 ```
 
-### Various additional features
+#### Various additional features
 
 + The `generate` function will output all the points [lines] of a
   projective plane of a given order:
@@ -179,10 +160,8 @@ julia> diam(G)
   julia> Projective(1,2,3,11) == Projective(2,4,6,11)
   true
   ```
-
 + The `hash` function is defined for `Projective` objects so they may
   be stored in `Set` containers, used as `Dict` keys, and so forth.
-
 + Two `Projective` objects (or the same modulus) can be multiplied
   with `*`: this is simply the dot product of their homogeneous
   coordinate representations. This is used by the `incident` function
@@ -202,7 +181,7 @@ julia> diam(G)
   ```
 
 
-### Internals of the `Projective` type
+#### Internals of the `Projective` type
 
 The three coordinates are held as `Mod` objects (with, perhaps,
 differing values but the same modulus `p`). These coordinates are
