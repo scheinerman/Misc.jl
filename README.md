@@ -12,10 +12,6 @@ worth packaging as a module, but still might be useful.
   order.
 * `Benford`: Experiments for initial digits of numbers.
   (Likely not of use to anyone but me.)
-* `DictCompose`: For dictionaries `f` and `g`, define `f*g` to be a
-  new dictionary in which `(f*g)[x]` is `f[g[x]]`. Warnings are raised
-  to report the number of bad `x` values (where `g[x]` is not a key of
-  `f`).
 * `factorion`: code for finding all factorions.
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
 
@@ -29,6 +25,7 @@ worth packaging as a module, but still might be useful.
   `SimpleGraphRepresentations`.
 * `IntervalOrder`: *This file has been removed!* See
 `SimplePosetRepresentations`.
+* `DictCompose`: Moved to `SimpleTools`.
 
 ## More detail
 
