@@ -14,18 +14,8 @@ worth packaging as a module, but still might be useful.
   (Likely not of use to anyone but me.)
 * `factorion`: code for finding all factorions.
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
-
-### Removed items
-
-* `latex`: *This file has been removed!* Please see my new
-  `LatexPrint` module.
-* `PermutationGraph`: *This file has been removed!*
-  See `SimpleGraphRepresentations`.
-* `IntervalGraph`: *This file has been removed!* See
-  `SimpleGraphRepresentations`.
-* `IntervalOrder`: *This file has been removed!* See
-`SimplePosetRepresentations`.
-* `DictCompose`: Moved to `SimpleTools`.
+* `binom_rv(n,p)` returns an integer in `0:n` according to the binomial
+distribution.
 
 ## More detail
 
