@@ -14,8 +14,8 @@ worth packaging as a module, but still might be useful.
   (Likely not of use to anyone but me.)
 * `factorion`: code for finding all factorions.
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
-* `binom_rv(n,p)` returns an integer in `0:n` according to the binomial
-distribution.
+* `concat(list1,list2)` concatenate two lists (`Vector`s)
+holding elements of the same type. Creates a new list.
 
 ## More detail
 
