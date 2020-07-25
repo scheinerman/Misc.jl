@@ -1,6 +1,6 @@
 # Functions for factorions
 
-using Memoize
+using Memoize, ProgressMeter
 
 @memoize function fast_fact(n::Int)
     return factorial(n)
@@ -44,10 +44,11 @@ end
 
 function find_all_factorions()
     stop = 10^fact_upper_bound()
-
+    PM = Progress(stop)
     for n=1:stop
         if is_factorion(n)
             println(n)
         end
+        next!(PM)
     end
 end
