@@ -44,11 +44,13 @@ end
 
 function find_all_factorions()
     stop = 10^fact_upper_bound()
+    list = Int[]
     PM = Progress(stop)
     for n=1:stop
         if is_factorion(n)
-            println(n)
+            push!(list,n)
         end
         next!(PM)
     end
+    return list
 end
