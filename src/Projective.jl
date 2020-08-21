@@ -1,31 +1,31 @@
 # For dealing with projective planes of prime order
 
-using Mods
+using Mods, Primes, SimpleGraphs
 
 import Base.show, Base.hash, Base.*
 
-immutable Projective
+struct Projective
     a::Mod
     b::Mod
     c::Mod
     function Projective(aa::Integer,bb::Integer,cc::Integer,p::Integer)
         if ~isprime(p)
-            warn("Modulus is supposed to be prime. Continuing...")
+            @warn "Modulus $p is supposed to be prime. Continuing..."
         end
-        a = Mod(aa,p)
-        b = Mod(bb,p)
-        c = Mod(cc,p)
+        a = Mod{p}(aa)
+        b = Mod{p}(bb)
+        c = Mod{p}(cc)
 
         if c != 0
             cinv = c'
             a *= cinv
             b *= cinv
-            c  = Mod(1,p)
+            c  = Mod{p}(1)
         elseif b != 0 # so c==0
             a *= b'
-            b  = Mod(1,p)
+            b  = Mod{p}(1)
         elseif a != 0
-            a = Mod(1,p)
+            a = Mod{p}(1)
         else
             error("Values a,b,c cannot all be 0 mod " * string(p))
         end
@@ -36,7 +36,7 @@ end
 
 function show(io::IO, P::Projective)
     print(io, "[", P.a.val, ",", P.b.val, ",",
-          P.c.val,"]_(", P.a.mod, ")")
+          P.c.val,"]_(", modulus(P.a), ")")
 end
 
 *(P::Projective, Q::Projective) = P.a*Q.a + P.b*Q.b + P.c*Q.c
@@ -50,14 +50,14 @@ function hash(P::Projective, h::UInt64 = uint64(0))
     return h3
 end
 
-getvals(P::Projective) = (P.a.val, P.b.val, P.c.val, P.a.mod)
+getvals(P::Projective) = (P.a.val, P.b.val, P.c.val, modulus(P.a))
 
 function generate(p::Integer)
     if ~isprime(p)
         error("Modulus must be prime")
     end
     n = p*p+p+1
-    A = Array(Projective,n)
+    A = Array{Projective}(undef,n)
     count = 1
 
     # case a = 1
