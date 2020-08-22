@@ -12,10 +12,13 @@ worth packaging as a module, but still might be useful.
   order.
 * `Benford`: Experiments for initial digits of numbers.
   (Likely not of use to anyone but me.)
-* `factorion`: code for finding all factorions.
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
 * `concat(list1,list2)` concatenate two lists (`Vector`s)
 holding elements of the same type. Creates a new list.
+
+
+Note: Factorions moved to their 
+[own module](https://github.com/scheinerman/Factorions.jl).
 
 ## More detail
 
