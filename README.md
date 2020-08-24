@@ -8,13 +8,14 @@ worth packaging as a module, but still might be useful.
 
 * `Cayley`: Create Cayley directed graphs. Needs the `Permutations`
   and `SimpleGraphs` modules.
-* `Projective`: Working with finite projective planes of prime
-  order.
+* `Projective`: **REMOVED!** See `LinearAlgebraX` for this functionality.
 * `Benford`: Experiments for initial digits of numbers.
   (Likely not of use to anyone but me.)
 * `istum(A)` determines if the integer matrix `A` is totally unimodular.
 * `concat(list1,list2)` concatenate two lists (`Vector`s)
 holding elements of the same type. Creates a new list.
+* `matrix_match(A,B)` for matrices `A` and `B` returns permutation matrices 
+`P` and `Q` such that `P*A==B*Q` (if possible).
 
 
 Note: Factorions moved to their 
