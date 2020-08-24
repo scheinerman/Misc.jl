@@ -1,4 +1,4 @@
-using ChooseOptimizer, JuMP
+using ChooseOptimizer, JuMP, Multisets
 
 """
 `matrix_match(A,B)` returns permutation matrices `P` and `Q` 
@@ -9,6 +9,11 @@ function matrix_match(A::AbstractMatrix, B::AbstractMatrix)
     if (r,c) != size(B)
         error("Matrices must have the same dimensions")
     end 
+    err_msg = "Matrices do not match"
+
+    if Multiset(collect(A)) != Multiset(collect(B))
+        error(err_msg)
+    end
 
     m = Model(get_solver())
 
@@ -38,7 +43,7 @@ function matrix_match(A::AbstractMatrix, B::AbstractMatrix)
     optimize!(m)
     status = Int(termination_status(m))
     if status != 1
-        error("Matrices don't match")
+        error(err_msg)
     end 
 
     PP = Int.(value.(P))
