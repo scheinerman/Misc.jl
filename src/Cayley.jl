@@ -33,4 +33,4 @@ function Cayley(gens::Array{Permutation,1})
     return G
 end
 
-Cayley(perms...) = Cayley(collect)
+Cayley(perms...) = Cayley(collect(perms))
