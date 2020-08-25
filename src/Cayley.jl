@@ -1,7 +1,7 @@
-# Functions for creating a Cayley digraph based on S_n and permtuation
+# Functions for creating a Cayley digraph based on S_n and permutation
 # generators.
 
-using Permutations
+using Permutations, Combinatorics
 using SimpleGraphs
 
 function Cayley(gens::Array{Permutation,1})
@@ -12,23 +12,25 @@ function Cayley(gens::Array{Permutation,1})
 
     n = length(gens[1])
 
-    for k=2:ng
+    for k = 2:ng
         if length(gens[k]) != length(gens[k-1])
             error("All generators must be same length")
         end
     end
 
 
-    verts = [ Permutation(p) for p in permutations(1:n) ]
+    verts = [Permutation(p) for p in permutations(1:n)]
 
     G = SimpleDigraph{Permutation}()
 
     for v in verts
-        add!(G,v)
+        add!(G, v)
         for p in gens
-            add!(G,v,v*p)
+            add!(G, v, v * p)
         end
     end
 
     return G
 end
+
+Cayley(perms...) = Cayley(collect)
