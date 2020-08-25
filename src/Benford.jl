@@ -20,10 +20,10 @@ function first_digit(x::Real, alert::Bool=false)
     return char2digit(c)
 end
 
-function first_counts{T<:Real}(x::Array{T,1})
+function first_counts(x::Array{T,1}) where T<:Real
     digs = map(first_digit,x)
     n = length(digs)
-    counts = int(zeros(9))
+    counts = zeros(Int,9)
     for d in digs
         if d != 0
             counts[d] += 1
@@ -32,7 +32,7 @@ function first_counts{T<:Real}(x::Array{T,1})
     return counts
 end
 
-function first_hists{T<:Real}(x::Array{T,1})
+function first_hists(x::Array{T,1}) where T<:Real
     counts = first_counts(x)
     hist = zeros(9)
     S = sum(counts)
@@ -42,21 +42,21 @@ function first_hists{T<:Real}(x::Array{T,1})
     return counts, hist
 end
 
-function report{T<:Real}(x::Array{T,1})
+function report(x::Array{T,1}) where {T<:Real}
     counts, hist = first_hists(x)
     for k=1:9
-        println(k,"\t", counts[k], "\t", round(hist[k]*100,1), "%\t",
+        println(k,"\t", counts[k], "\t", round(hist[k]*100,digits=1), "%\t",
         log(10,k+1)-log(10,k))
     end
 end
 
-function report_array{T<:Real}(x::Array{T,1})
+function report_array(x::Array{T,1}) where {T<:Real}
     counts, hist = first_hists(x)
     A = Array(Any, (9,3))
     for k=1:9
         A[k,1] = k
         A[k,2] = counts[k]
-        A[k,3] = round(hist[k]*100,2)
+        A[k,3] = round(hist[k]*100,digits=2)
     end
     return A
 end

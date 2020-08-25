@@ -5,17 +5,17 @@ using ChooseOptimizer, JuMP, Multisets
 so that `P*A==B*Q` or throws an error if not possible. 
 """
 function matrix_match(A::AbstractMatrix, B::AbstractMatrix)
-    r,c = size(A)
-    if (r,c) != size(B)
-        error("Matrices must have the same dimensions")
-    end 
     err_msg = "Matrices do not match"
 
-    if Multiset(collect(A)) != Multiset(collect(B))
+    # Check that A and B have same dimensions and same elements
+    r,c = size(A)
+    if (r,c) != size(B) || Multiset(collect(A)) != Multiset(collect(B))
         error(err_msg)
-    end
+    end 
 
     m = Model(get_solver())
+
+    # Set up P and Q are permutation matrices
 
     @variable(m, P[1:r,1:r], Bin)
     @variable(m, Q[1:c,1:c], Bin)
@@ -30,6 +30,7 @@ function matrix_match(A::AbstractMatrix, B::AbstractMatrix)
         @constraint(m,sum(Q[j,i] for j=1:c) == 1)
     end
 
+    # require P*A == B*Q
 
     for i=1:r 
         for j=1:c 
@@ -49,6 +50,4 @@ function matrix_match(A::AbstractMatrix, B::AbstractMatrix)
     PP = Int.(value.(P))
     QQ = Int.(value.(Q))
     return PP,QQ
-
-
 end 
